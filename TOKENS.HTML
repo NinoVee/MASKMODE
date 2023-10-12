@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MASKMODE.ETH</title>
+  <style>
+    body {
+      background-color: black;
+      color: rgb(8, 253, 44);
+      margin: 0;
+      font-family: serif, sans-serif;
+    }
+
+    .navbar {
+      background-color: black;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .navbar a {
+      display: inline-block;
+      color: rgb(8, 253, 44);
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .navbar a:hover {
+      background-color:;
+      color: red;
+    }
+
+    .content {
+      text-align: center;
+      padding: 20px;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+    }
+
+    .watermelon-emoji {
+      font-size: 80px; /* Increase the size as needed */
+    }
+
+    .footer {
+      background-color: black;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .footer a {
+      color: rgb(8, 253, 44);
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 20px;
+    }
+
+    .footer a:hover {
+      color: red;
+    }
+
+    @keyframes dripAnimation {
+      to {
+        transform: translateY(10px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <a href="HOME.HTML">HOME</a>
+    <a href="MERCH.HTML">MERCH</a>
+    <a href="TOKENS.HTML">TOKENS</a>
+  </div>
+  <div class="content">
+    <p data-v-9a8a22c4="" data-v-2cdd590e="" data-v-3682402d="" class="ww-text-content ww-text ww-object-elem"
+      ww-editor-state="[object Object]" ww-front-state="[object Object]"
+      uid="f0d74cc0-c8cb-4b3d-bead-d1b1745f9d00" ww-responsive="ww-text-content"
+      style="padding: 0px; max-height: unset; min-height: unset;
+      font: var(--2bcc613e-139a-4dc4-9432-96051ad720d9, 600 48px/56px var(--ww-default-font-family,Serifs-typeface));
+      text-align: center; color: rgb(8, 253, 44); overflow: initial; white-space: initial; text-overflow: initial;
+      text-decoration-style: solid;">MASKMODE.ETH</p>
+    <p data-v-9a8a22c4="" data-v-2cdd590e="" data-v-3682402d="" class="ww-text-content ww-text ww-object-elem"
+      ww-editor-state="[object Object]" ww-front-state="[object Object]"
+      uid="44a51619-dbdf-43fd-9798-140c16811a43" ww-responsive="ww-text-content"
+      style="padding: 0px; max-height: unset; min-height: unset; font-size: 14px; font-family: var(--ww-default-font-family);
+      text-align: center; color: rgb(8, 253, 44); overflow: initial; white-space: initial; text-overflow: initial;
+      text-decoration-style: solid;">"THE GREATER THE SACRAFICE, THE GREATER THE REWARD".</p>
+    <div class="content">
+    </p>
+    <button onclick="mint()">
+      <span class="watermelon-emoji">🍉</span>
+    </button>
+  </div>
+      <video width="640" height="360" controls>
+        <source src="https://assets.manifold.xyz/video/upload/c_limit,q_80,w_1280/v1684342956/a0c58d17d57e289c96113e84e36ffc5a0eee1403702177a54339eb2c421ecb0d.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="https://www.linkedin.com/in/john-harold-thompson-iii-435197152/" target="_blank">NINO</a>
+    <a href="https://x.com/STUFFDOE_ETH/status/1658889813662269441?s=20" target="_blank">X</a>
+    <a href="#" target="_blank">IG</a>
+  </div>
+
+  <script>
+    function mint() {
+      var watermelonEmoji = document.querySelector('.watermelon-emoji');
+      watermelonEmoji.style.animation = 'dripAnimation 0.5s ease-in-out';
+      
+      // Add your minting logic here
+      alert('Minting in progress...');
+    }
+  </script>
+</body>
+
+</html>
+

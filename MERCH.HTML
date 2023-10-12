@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MASKMODE.ETH</title>
+  <style>
+    body {
+      background-color: black;
+      color: rgb(8, 253, 44);
+      margin: 0;
+      font-family: serif, sans-serif;
+    }
+
+    .navbar {
+      background-color: black;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .navbar a {
+      display: inline-block;
+      color: rgb(8, 253, 44);
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+    }
+
+    .navbar a:hover {
+      background-color:;
+      color: red;
+    }
+
+    .content {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .product {
+      margin-bottom: 30px;
+    }
+
+    button {
+      display: block;
+      margin: 0 auto;
+      margin-top: 20px;
+    }
+
+    .footer {
+      background-color: black;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .footer a {
+      color: rgb(8, 253, 44);
+      text-decoration: none;
+      margin: 0 10px;
+      font-size: 20px;
+    }
+
+    .footer a:hover {
+      color: red;
+    }
+
+    .ww-image-basic {
+      display: block;
+      margin: 0 auto;
+      max-width: 80%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="navbar">
+    <a href="HOME.HTML">HOME</a>
+    <a href="MERCH.HTML">MERCH</a>
+    <a href="TOKENS.HTML">TOKENS</a>
+  </div>
+  <div class="content">
+    <div class="product">
+      <h2>HOODIE</h2>
+      <div class="ww-image-basic">
+        <img src="{image}" alt="HOOD" loading="lazy" class="ww-image-basic">
+      </div>
+      <label for="color1">Color:</label>
+      <select id="color1" name="color1">
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="black">Black</option>
+      </select>
+      <label for="size1">Size:</label>
+      <select id="size1" name="size1">
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <h2>HAT</h2>
+      <div class="ww-image-basic">
+        <img src="{image}" alt="LID" loading="lazy" class="ww-image-basic">
+      </div>
+      <label for="color2">Color:</label>
+      <select id="color2" name="color2">
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="black">Black</option>
+      </select>
+      <label for="size2">Size:</label>
+      <select id="size2" name="size2">
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+      <button>Add to Cart</button>
+    </div>
+
+    <div class="product">
+      <h2>BAG</h2>
+      <div class="ww-image-basic">
+        <img src="{image}" alt="TOTE" loading="lazy" class="ww-image-basic">
+      </div>
+      <label for="color3">Color:</label>
+      <select id="color3" name="color3">
+        <option value="red">Red</option>
+        <option value="green">Green</option>
+        <option value="black">Black</option>
+      </select>
+      <label for="size3">Size:</label>
+      <select id="size3" name="size3">
+        <option value="small">Small</option>
+        <option value="medium">Medium</option>
+        <option value="large">Large</option>
+      </select>
+      <button>Add to Cart</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="#" target="_blank">NINO</a>
+    <a href="#" target="_blank">X</a>
+    <a href="#" target="_blank">IG</a>
+  </div>
+</body>
+<style>
+  /* Existing styles */
+
+  /* Add some styles for the cart icon */
+  #cart-icon {
+    display: inline-block;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(8, 253, 44);
+    color: black;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  #cart-count {
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<div class="navbar">
+  <!-- Your existing navigation links -->
+
+  <!-- Add a cart icon -->
+  <div id="cart-icon" onclick="openCart()">
+    🛒 <span id="cart-count">0</span>
+  </div>
+</div>
+
+<!-- Your existing content -->
+
+<script>
+  // JavaScript to handle the cart functionality
+  let cartCount = 0;
+
+  function openCart() {
+    // Add your logic to open the cart or navigate to the cart page
+    alert('Open Cart!');
+  }
+
+  function addToCart() {
+    // Add your logic to add an item to the cart
+    cartCount++;
+    updateCartCount();
+  }
+
+  function updateCartCount() {
+    // Update the cart count in the UI
+    document.getElementById('cart-count').innerText = cartCount;
+  }
+</script>
+</body>
+
+</html>
