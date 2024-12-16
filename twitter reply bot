@@ -1,3 +1,24 @@
+import tweepy
+from airtable import Airtable
+from datetime import datetime
+from langchain.chat_models import ChatOpenAI
+from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, HumanMessagePromptTemplate
+
+# Twitter API credentials for @Guwap_sol
+TWITTER_API_KEY = "RrBZRTizeMMySipojfjG2itiU"
+TWITTER_API_SECRET = "6IWZKesJvQcaIwXQZU7uqwoUTg3Tyj4nJqbgLi4MrgMUD9QmEp"
+TWITTER_BEARER_TOKEN = "AAAAAAAAAAAAAAAAAAAAAKFXxgEAAAAA9O5Bxnd5FuHsKryx3%2BW5538VeAc%3DZqdnmHEAlu8y34klYFtvGnfw4ib8b2DaeXKVjrosGTm0nGsbfK"
+TWITTER_ACCESS_TOKEN = "1867874278148034560-qGFqqNb3ggMyzD4L2GPbmYOl49QnEA"
+TWITTER_ACCESS_TOKEN_SECRET = "JMDmCStItza2Rp2ZVCZZFI83hZfaF67ya4dJ7Ogxm3Saa"
+
+# Airtable API credentials (update with your actual values)
+AIRTABLE_API_KEY = "YourAirtableAPIKey"
+AIRTABLE_BASE_KEY = "YourAirtableBaseKey"
+AIRTABLE_TABLE_NAME = "YourAirtableTableName"
+
+# OpenAI API key
+OPENAI_API_KEY = "YourOpenAIAPIKey"
+
 class TwitterBot:
     def __init__(self):
         self.twitter_api = tweepy.Client(
@@ -22,19 +43,7 @@ class TwitterBot:
             self.twitter_api.delete_rules([rule.id for rule in rules])
 
         self.twitter_api.add_rules(tweepy.StreamRule(keyword))
-class MemeCoinStream(tweepy.StreamingClient):
-    def __init__(self, twitter_bot, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.twitter_bot = twitter_bot
 
-    def on_tweet(self, tweet):
-        # Avoid replying to retweets or replies
-        if not tweet.text.startswith("RT") and not tweet.in_reply_to_user_id:
-            print(f"Found tweet: {tweet.text}")
-            self.twitter_bot.respond_to_meme_tweet(tweet)
-
-class TwitterBot:
-    ...
     def respond_to_meme_tweet(self, tweet):
         # Check if already responded
         if self.check_already_responded(tweet.id):
@@ -46,7 +55,6 @@ class TwitterBot:
         try:
             # Post the reply
             response = self.twitter_api.create_tweet(text=response_text, in_reply_to_tweet_id=tweet.id)
-            self.mentions_replied += 1
             
             # Log response in Airtable
             self.airtable.insert({
@@ -56,31 +64,52 @@ class TwitterBot:
                 'response_text': response_text,
                 'created_at': datetime.utcnow().isoformat()
             })
+            print(f"Replied to tweet: {tweet.text}")
         except Exception as e:
             print(f"Error replying to tweet {tweet.id}: {e}")
-            self.mentions_replied_errors += 1
-def generate_response(self, tweet_text):
-    system_template = """
-        You are a financial guru with a love for analyzing meme coins.
-        
-        % RESPONSE TONE:
-        - Be clever and witty.
-        - Make light-hearted comments about meme coins and their unpredictability.
-        
-        % RESPONSE FORMAT:
-        - Use short, engaging responses under 200 characters.
-        - Avoid emojis.
-        
-        % RESPONSE CONTENT:
-        - Highlight the speculative nature of meme coins.
-        - If unsure, use a humorous disclaimer.
-    """
-    system_message_prompt = SystemMessagePromptTemplate.from_template(system_template)
-    human_message_prompt = HumanMessagePromptTemplate.from_template("{text}")
-    chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
 
-    final_prompt = chat_prompt.format_prompt(text=tweet_text).to_messages()
-    return self.llm(final_prompt).content
+    def generate_response(self, tweet_text):
+        system_template = """
+            You are a financial guru with a love for analyzing meme coins.
+            
+            % RESPONSE TONE:
+            - Be clever and witty.
+            - Make light-hearted comments about meme coins and their unpredictability.
+            
+            % RESPONSE FORMAT:
+            - Use short, engaging responses under 200 characters.
+            - Avoid emojis.
+            
+            % RESPONSE CONTENT:
+            - Highlight the speculative nature of meme coins.
+            - If unsure, use a humorous disclaimer.
+        """
+        system_message_prompt = SystemMessagePromptTemplate.from_template(system_template)
+        human_message_prompt = HumanMessagePromptTemplate.from_template("{text}")
+        chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
+
+        final_prompt = chat_prompt.format_prompt(text=tweet_text).to_messages()
+        return self.llm(final_prompt).content
+
+    def check_already_responded(self, tweet_id):
+        """Check if the tweet has already been responded to."""
+        records = self.airtable.get_all(view='Grid view')
+        for record in records:
+            if record['fields'].get('tweet_id') == str(tweet_id):
+                return True
+        return False
+
+class MemeCoinStream(tweepy.StreamingClient):
+    def __init__(self, twitter_bot, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.twitter_bot = twitter_bot
+
+    def on_tweet(self, tweet):
+        # Avoid replying to retweets or replies
+        if not tweet.text.startswith("RT") and not tweet.in_reply_to_user_id:
+            print(f"Found tweet: {tweet.text}")
+            self.twitter_bot.respond_to_meme_tweet(tweet)
+
 if __name__ == "__main__":
     bot = TwitterBot()
     stream = MemeCoinStream(
